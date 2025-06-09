@@ -29,7 +29,7 @@ public class MainApp extends Application {
     @Override
     public void stop() {
         if (mainController != null) {
-            mainController.stopScheduler();
+            mainController.stop();
         }
     }
 
