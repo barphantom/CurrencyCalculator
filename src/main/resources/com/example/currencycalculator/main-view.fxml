@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.currencycalculator.controller.MainController">
+
+    <!-- GÓRA: Ulubione -->
+    <top>
+        <VBox spacing="5">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+<!--            <Label fx:id="favoritesLabel" text="Ulubione waluty:" />-->
+            <VBox fx:id="favoritesBox" spacing="5" />
+            <Button text="Dodaj ulubioną walutę" onAction="#addFavorite"/>
+        </VBox>
+    </top>
+
+    <!-- ŚRODEK: Tabela kursów -->
+    <center>
+        <TableView fx:id="ratesTable" prefHeight="300">
+            <columns>
+                <TableColumn fx:id="currencyColumn" text="Waluta"/>
+                <TableColumn fx:id="rateColumn" text="Kurs (1 jednostka w PLN)"/>
+                <TableColumn fx:id="chartColumn" text="Wykres" prefWidth="100"/>
+            </columns>
+        </TableView>
+    </center>
+
+    <!-- DÓŁ: Kalkulator walut -->
+    <bottom>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <HBox spacing="10">
+                <Label text="Z:"/>
+                <ComboBox fx:id="fromCurrencyBox" prefWidth="100"/>
+                <Label text="Na:"/>
+                <ComboBox fx:id="toCurrencyBox" prefWidth="100"/>
+            </HBox>
+            <HBox spacing="10">
+                <TextField fx:id="amountField" promptText="Kwota" prefWidth="150"/>
+                <Button text="Przelicz" onAction="#onConvert"/>
+            </HBox>
+            <Label fx:id="resultLabel" text="Wynik pojawi się tutaj"/>
+        </VBox>
+    </bottom>
+
+</BorderPane>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.currencycalculator.controller.ChartController"
+            fx:id="rootPane"
+            prefHeight="400.0" prefWidth="600.0">
+
+
+    <LineChart fx:id="lineChart" layoutX="10" layoutY="10" prefWidth="600" prefHeight="400">
+        <xAxis>
+            <CategoryAxis label="Data"/>
+        </xAxis>
+        <yAxis>
+            <NumberAxis label="Kurs"/>
+        </yAxis>
+    </LineChart>
+
+</AnchorPane>
