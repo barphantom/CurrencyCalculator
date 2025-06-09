@@ -1,6 +1,8 @@
-package com.example.currencycalculator.repository;
+package com.example.currencycalculator.service;
 
 import java.util.*;
+
+import com.example.currencycalculator.api.OpenExchangeRatesClient;
 import com.example.currencycalculator.cache.ExchangeRateCache;
 
 

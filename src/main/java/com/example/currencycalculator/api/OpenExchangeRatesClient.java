@@ -1,4 +1,4 @@
-package com.example.currencycalculator.repository;
+package com.example.currencycalculator.api;
 
 import org.json.JSONObject;
 
