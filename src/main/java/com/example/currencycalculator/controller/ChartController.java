@@ -2,8 +2,8 @@ package com.example.currencycalculator.controller;
 
 import com.example.currencycalculator.cache.ExchangeRateCache;
 import com.example.currencycalculator.config.ConfigLoader;
-import com.example.currencycalculator.repository.ExchangeRateService;
-import com.example.currencycalculator.repository.OpenExchangeRatesClient;
+import com.example.currencycalculator.service.ExchangeRateService;
+import com.example.currencycalculator.api.OpenExchangeRatesClient;
 import javafx.fxml.FXML;
 import javafx.scene.chart.*;
 import javafx.scene.layout.AnchorPane;
@@ -20,10 +20,8 @@ public class ChartController {
     @FXML private LineChart<String, Number> lineChart;
     @FXML private AnchorPane rootPane;
 
-    String apiKey = ConfigLoader.loadApiKey();
-    ExchangeRateCache cache = new ExchangeRateCache(5 * 60 * 1000); // 5 min
-    OpenExchangeRatesClient client = new OpenExchangeRatesClient(apiKey);
-    ExchangeRateService apiService = new ExchangeRateService(client, cache);
+    private ExchangeRateService apiService;
+
 
     public void loadChartData(String currency) {
         LocalDate today = LocalDate.now();
@@ -85,7 +83,8 @@ public class ChartController {
         }
     }
 
-
-
+    public void setExchangeRateService(ExchangeRateService apiService) {
+        this.apiService = apiService;
+    }
 }
 
