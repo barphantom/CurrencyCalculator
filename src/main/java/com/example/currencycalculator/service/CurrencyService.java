@@ -6,7 +6,7 @@ import com.example.currencycalculator.config.ConfigLoader;
 import com.example.currencycalculator.model.CurrencyRate;
 
 import java.util.List;
-import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 public class CurrencyService {
     private final ExchangeRateService exchangeService = new ExchangeRateService(
@@ -14,18 +14,22 @@ public class CurrencyService {
             new ExchangeRateCache(5 * 60 * 1000)
     );
 
-    public List<CurrencyRate> getRates(List<String> currencies) throws Exception {
-        Map<String, Double> rates = exchangeService.getLatestRates();
-        double usdToPln = rates.get("PLN");
+    public CompletableFuture<List<CurrencyRate>> getRates(List<String> currencies) {
+        return exchangeService.getLatestRates().thenApply(rates -> {
+            double usdToPln = rates.get("PLN");
 
-        return currencies.stream()
-                .filter(c -> !c.equals("PLN") && rates.containsKey(c))
-                .map(c -> new CurrencyRate(c, usdToPln / rates.get(c)))
-                .toList();
+            return currencies.stream()
+                    .filter(c -> !c.equals("PLN") && rates.containsKey(c))
+                    .map(c -> new CurrencyRate(c, usdToPln / rates.get(c)))
+                    .toList();
+        });
     }
 
-    public double convert(double amount, String from, String to) throws Exception {
-        return amount * exchangeService.getExchangeRate(from, to);
+
+    public CompletableFuture<Double> convert(double amount, String from, String to) {
+        return exchangeService.getExchangeRate(from, to)
+                .thenApply(rate -> amount * rate);
     }
+
 }
 

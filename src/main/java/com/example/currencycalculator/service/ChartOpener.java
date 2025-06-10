@@ -19,6 +19,7 @@ public class ChartOpener {
     public TableCell<CurrencyRate, Void> createChartButtonCell() {
         return new TableCell<>() {
             private final Button button = new Button("Wykres");
+
             {
                 button.setOnAction(e -> {
                     CurrencyRate rate = getTableView().getItems().get(getIndex());
